@@ -7,7 +7,7 @@
 1. Install Nginx, Php, Git and MySql:
 
 ```bash
-sudo apt update a
+sudo apt update
 ```
 
 ```bash

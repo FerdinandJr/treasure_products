@@ -1,4 +1,4 @@
-﻿# Get Started with PHP, MySQL in Nginx: 
+﻿# Run this Application with PHP, MySQL in Nginx: 
 
 
 ## Install dependencies
@@ -7,7 +7,7 @@
 1. Install Nginx, Php, Git and MySql:
 
 ```bash
-sudo apt update
+sudo apt update a
 ```
 
 ```bash

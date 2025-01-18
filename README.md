@@ -158,6 +158,12 @@ use my_store;
 show tables;
 ```
 
+Optional: show data
+
+```bash
+SELECT * FROM table_name LIMIT 10;
+```
+
 5. Restart Nginx 
 
 ```bash

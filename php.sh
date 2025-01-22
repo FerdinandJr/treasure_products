@@ -13,6 +13,8 @@ echo "Cloning the repository..."
 cd /home/ubuntu/
 git clone https://github.com/FerdinandJr/php_mysql_nginx_docker_treasure-products.git
 
+mv /home/ubuntu/php_mysql_nginx_docker_treasure-products /var/www/html/
+
 # Edit Nginx default configuration
 echo "Configuring Nginx..."
 sudo bash -c 'cat > /etc/nginx/sites-available/default <<EOL
@@ -20,7 +22,7 @@ server {
     listen 80 default_server;
     listen [::]:80 default_server;
 
-    root /var/www/html/treasure-products;
+    root /var/www/html/php_mysql_nginx_docker_treasure-products;
     index index.php index.html index.htm;
 
     server_name _;
@@ -50,12 +52,12 @@ sudo apt install php8.3 php8.3-fpm php8.3-mysql -y
 echo "Configuring MySQL..."
 sudo mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Mystore123!'; FLUSH PRIVILEGES;"
 
+mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS my_store;"
+
 # Import database
 echo "Importing database..."
-mysql -u root -p my_store < /home/ubuntu/treasure-products/my_store.sql
+mysql -u root -p my_store < /home/ubuntu/php_mysql_nginx_docker_treasure-products/my_store.sql
 
 # Restart Nginx to apply the changes
 echo "Restarting Nginx..."
 sudo systemctl restart nginx
-
-echo "Setup complete."

@@ -1,19 +1,15 @@
 #!/bin/bash
 
+set -e  # Exit immediately if a command exits with a non-zero status
+
 # Update and install necessary packages
 echo "Updating package list and installing required packages..."
 sudo apt update -y
-sudo apt install nginx -y
-sudo apt install php -y
-sudo apt install git -y
-sudo apt install mysql-server -y
+sudo apt install -y nginx php php-fpm php-mysql git mysql-server
 
 # Clone the Git repository
 echo "Cloning the repository..."
-cd /home/ubuntu/
-git clone https://github.com/FerdinandJr/php_mysql_nginx_docker_treasure-products.git
-
-mv /home/ubuntu/php_mysql_nginx_docker_treasure-products /var/www/html/
+sudo git clone https://github.com/FerdinandJr/php_mysql_nginx_docker_treasure-products.git /var/www/html/php_mysql_nginx_docker_treasure-products
 
 # Edit Nginx default configuration
 echo "Configuring Nginx..."
@@ -31,48 +27,34 @@ server {
         try_files \$uri \$uri/ =404;
     }
 
-    location ~ \\.php\$ {
+    location ~ \.php\$ {
         include snippets/fastcgi-php.conf;
-        fastcgi_pass unix:/var/run/php/php8.3-fpm.sock;  # Ensure correct PHP version (replace 7.4 if necessary)
+        fastcgi_pass unix:/var/run/php/php8.3-fpm.sock;  # Ensure correct PHP version (replace if necessary)
         fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
         include fastcgi_params;
     }
 
-    location ~ \\/\\.ht {
+    location ~ /\.ht {
         deny all;
     }
 }
 EOL'
 
-# Install PHP 8.3 and related packages
-echo "Installing PHP 8.3 and PHP-FPM..."
-sudo apt install php8.3 php8.3-fpm php8.3-mysql -y
-
-# Set up MYSQL Login automation
-echo "Settomg up MYSQL Login automation"
-
-#Create the .my.cnf file to avoid password prompt
-sudo bash -c 'cat > /root/.my.cnf << EOL
-[client]
-user=root
-password=Mystore123!
-host=localhost
-EOL'
-
-# Set correct permissions from for the .my.cnf file
-sudo chmod 600 /root/.my.cnf
-
+# Ensure PHP 8.3 is installed (if not already)
+echo "Ensuring PHP 8.3 and PHP-FPM are installed..."
+sudo apt install -y php8.3 php8.3-fpm php8.3-mysql
 
 # Configure MySQL
 echo "Configuring MySQL..."
 sudo mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Mystore123!'; FLUSH PRIVILEGES;"
-
-mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS my_store;"
+sudo mysql -u root -pMystore123! -e "CREATE DATABASE IF NOT EXISTS my_store;"
 
 # Import database
 echo "Importing database..."
-mysql -u root -p my_store < /home/ubuntu/php_mysql_nginx_docker_treasure-products/my_store.sql
+sudo mysql -u root -pMystore123! my_store < /var/www/html/php_mysql_nginx_docker_treasure-products/my_store.sql
 
 # Restart Nginx to apply the changes
 echo "Restarting Nginx..."
 sudo systemctl restart nginx
+
+echo "Setup completed successfully!"

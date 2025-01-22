@@ -48,6 +48,21 @@ EOL'
 echo "Installing PHP 8.3 and PHP-FPM..."
 sudo apt install php8.3 php8.3-fpm php8.3-mysql -y
 
+# Set up MYSQL Login automation
+echo "Settomg up MYSQL Login automation"
+
+#Create the .my.cnf file to avoid password prompt
+sudo bash -c 'cat > /root/.my.cnf << EOL
+[client]
+user=root
+password=Mystore123!
+host=localhost
+EOL'
+
+# Set correct permissions from for the .my.cnf file
+sudo chmod 600 /root/.my.cnf
+
+
 # Configure MySQL
 echo "Configuring MySQL..."
 sudo mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Mystore123!'; FLUSH PRIVILEGES;"

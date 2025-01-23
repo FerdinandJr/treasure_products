@@ -52,7 +52,7 @@ sudo apt install -y php8.3 php8.3-fpm php8.3-mysql
 
 # Configure MySQL
 echo "Configuring MySQL..."
-sudo mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Mystore123!'; FLUSH PRIVILEGES;"
+
 sudo mysql -u root -p Mystore123! -e "CREATE DATABASE IF NOT EXISTS my_store;"
 
 # Import database

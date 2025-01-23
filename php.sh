@@ -57,7 +57,7 @@ sudo mysql -u root -p Mystore123! -e "CREATE DATABASE IF NOT EXISTS my_store;"
 
 # Import database
 echo "Importing database..."
-sudo mysql -u root -pMystore123! my_store < /var/www/html/php_mysql_nginx_docker_treasure-products/my_store.sql
+sudo mysql -u root -p Mystore123! my_store < /var/www/html/php_mysql_nginx_docker_treasure-products/my_store.sql
 
 #stop Apache server
 sudo systemctl stop apache2

@@ -7,6 +7,12 @@ echo "Updating package list and installing required packages..."
 sudo apt update -y
 sudo apt install -y nginx php php-fpm php-mysql git mysql-server
 
+
+
+# Delete previous file configuration
+echo "Deleting previous file configuration..."
+sudo rm /var/www/html/php_mysql_nginx_docker_treasure-products
+
 # Clone the Git repository
 echo "Cloning the repository..."
 sudo git clone https://github.com/FerdinandJr/php_mysql_nginx_docker_treasure-products.git /var/www/html/php_mysql_nginx_docker_treasure-products

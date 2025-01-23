@@ -52,27 +52,12 @@ sudo apt install -y php8.3 php8.3-fpm php8.3-mysql
 
 # Configure MySQL
 echo "Configuring MySQL..."
-echo "Configuring MySQL..."
-sudo mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Mystore123!'; FLUSH PRIVILEGES;"
-if [ $? -ne 0 ]; then
-  echo "Failed to configure MySQL. Skipping the rest of the script."
-  exit 1
-fi
-
-# Create database
+sudo mysql -u root -p -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Mystore123!'; FLUSH PRIVILEGES;"
 sudo mysql -u root --password=Mystore123! -e "CREATE DATABASE IF NOT EXISTS my_store;"
-if [ $? -ne 0 ]; then
-  echo "Failed to create the database. Skipping the rest of the script."
-  exit 1
-fi
 
 # Import database
 echo "Importing database..."
 sudo mysql -u root --password=Mystore123! my_store < /var/www/html/php_mysql_nginx_docker_treasure-products/my_store.sql
-if [ $? -ne 0 ]; then
-  echo "Failed to import the database."
-  exit 1
-fi
 
 #stop Apache server
 sudo systemctl stop apache2

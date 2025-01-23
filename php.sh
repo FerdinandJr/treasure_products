@@ -11,7 +11,7 @@ sudo apt install -y nginx php php-fpm php-mysql git mysql-server
 
 # Delete previous file configuration
 echo "Deleting previous file configuration..."
-sudo rm /var/www/html/php_mysql_nginx_docker_treasure-products
+sudo rm -rf /var/www/html/php_mysql_nginx_docker_treasure-products
 
 # Clone the Git repository
 echo "Cloning the repository..."

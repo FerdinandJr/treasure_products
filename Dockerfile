@@ -1,30 +1,24 @@
-# Dockerfile for PHP, Nginx and MySQL setup
-
-# Use the official PHP image with Nginx
+# Use an official PHP image with Nginx
 FROM php:8.3-fpm
 
-# Install required packages
-RUN apt-get update -y && \
-    apt-get install -y nginx git mysql-client libmysqlclient-dev && \
-    rm -rf /var/lib/apt/lists/*
+# Install necessary dependencies
+RUN apt-get update && apt-get install -y \
+    nginx \
+    git \
+    mysql-client \
+    && apt-get clean
+
+# Set the working directory
+WORKDIR /var/www/html
 
 # Clone the repository
 RUN git clone https://github.com/FerdinandJr/php_mysql_nginx_docker_treasure-products.git /var/www/html/php_mysql_nginx_docker_treasure-products
 
-# Set the working directory
-WORKDIR /var/www/html/php_mysql_nginx_docker_treasure-products
-
-# Nginx configuration file
+# Copy the Nginx configuration file to the container
 COPY nginx/default.conf /etc/nginx/sites-available/default
 
-# PHP and Nginx setup
-RUN ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
-
-# Ensure correct permissions for the web folder
-RUN chown -R www-data:www-data /var/www/html/php_mysql_nginx_docker_treasure-products
-
-# Expose the required port
+# Expose ports
 EXPOSE 80
 
-# Start the services
+# Start both PHP-FPM and Nginx
 CMD service nginx start && php-fpm

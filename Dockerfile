@@ -1,31 +1,63 @@
-# Step 1: Set up the PHP environment with Nginx
-FROM php:8.1-fpm-alpine as php
+# Use an official Ubuntu as a parent image
+FROM ubuntu:22.04
 
-# Install required packages for PHP extensions and Nginx
-RUN apk update && apk add --no-cache \
-    nginx \
-    bash \
+# Set environment variables
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install necessary dependencies and update the package list
+RUN apt update -y && \
+    apt install -y \
+    software-properties-common \
+    ca-certificates \
     curl \
-    libpng-dev \
-    libjpeg-turbo-dev \
-    libfreetype6-dev \
-    zip \
+    lsb-release \
+    sudo && \
+    apt clean
+
+# Add the PHP repository (PHP 8.3)
+RUN add-apt-repository ppa:ondrej/php && \
+    apt update -y
+
+# Install the required packages
+RUN apt install -y \
+    nginx \
+    php8.3 \
+    php8.3-fpm \
+    php8.3-mysql \
     git \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd pdo pdo_mysql
+    mysql-server && \
+    apt clean
 
-# Step 2: Copy PHP configuration files
-COPY ./php.ini /usr/local/etc/php/
+# Clone the repository and set up the application
+RUN git clone https://github.com/FerdinandJr/php_mysql_nginx_docker_treasure-products.git /var/www/html/php_mysql_nginx_docker_treasure-products
 
-# Step 3: Set up the Nginx configuration
-COPY ./nginx.conf /etc/nginx/nginx.conf
+# Configure Nginx and PHP-FPM
+RUN bash -c 'echo "server {\
+    listen 80 default_server;\
+    listen [::]:80 default_server;\
+    root /var/www/html/php_mysql_nginx_docker_treasure-products;\
+    index index.php index.html index.htm;\
+    server_name _;\
+    location / {\
+        try_files \$uri \$uri/ =404;\
+    }\
+    location ~ \.php\$ {\
+        include snippets/fastcgi-php.conf;\
+        fastcgi_pass unix:/var/run/php/php8.3-fpm.sock;\
+        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;\
+        include fastcgi_params;\
+    }\
+    location ~ /\.ht {\
+        deny all;\
+    }\
+}" > /etc/nginx/sites-available/default'
 
-# Step 4: Copy the application source code to the container
-WORKDIR /var/www/html
-COPY . .
+# Expose ports
+EXPOSE 80 443
 
-# Step 5: Expose ports
-EXPOSE 80
-
-# Step 6: Start PHP-FPM and Nginx services in the background
-CMD ["sh", "-c", "php-fpm & nginx -g 'daemon off;'"]
+# Start Nginx and MySQL services, then execute custom startup scripts
+CMD service mysql start && \
+    mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Mystore123!'; FLUSH PRIVILEGES;" || true && \
+    mysql -u root --password=Mystore123! -e "CREATE DATABASE IF NOT EXISTS my_store;" && \
+    mysql -u root --password=Mystore123! my_store < /var/www/html/php_mysql_nginx_docker_treasure-products/my_store.sql && \
+    service nginx start && tail -f /dev/null

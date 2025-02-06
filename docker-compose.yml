@@ -1,32 +1,34 @@
-version: '3.8'
+version: "3.8"
 
 services:
   web:
     build: .
+    container_name: php_nginx_app
+    volumes:
+      - ./php_mysql_nginx_docker_treasure-products:/var/www/html/php_mysql_nginx_docker_treasure-products
+      - ./nginx/default.conf:/etc/nginx/sites-available/default
     ports:
       - "80:80"
-      - "443:443"
-    volumes:
-      - ./html:/var/www/html
-    environment:
-      MYSQL_ROOT_PASSWORD: Mystore123!
+    depends_on:
+      - db
     networks:
-      - mynetwork
+      - app-network
 
-  mysql:
+  db:
     image: mysql:8.0
+    container_name: mysql_db
     environment:
       MYSQL_ROOT_PASSWORD: Mystore123!
       MYSQL_DATABASE: my_store
-    networks:
-      - mynetwork
     volumes:
-      - mysql_data:/var/lib/mysql
+      - db_data:/var/lib/mysql
+      - ./my_store.sql:/docker-entrypoint-initdb.d/my_store.sql
+    networks:
+      - app-network
 
 networks:
-  mynetwork:
+  app-network:
     driver: bridge
 
 volumes:
-  mysql_data:
-    driver: local
+  db_data:

@@ -1,6 +1,4 @@
 <?php
-
-
 function getProducts(){
     global $con;
 

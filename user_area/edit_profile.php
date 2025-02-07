@@ -1,4 +1,3 @@
-<!-- connect file -->
 <?php
 include('../includes/connect.php');
 if(isset($_GET['edit_profile'])){

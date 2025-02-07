@@ -6,6 +6,8 @@ services:
     container_name: php-mysql-nginx
     volumes:
       - ./php_mysql_nginx_docker_treasure-products:/var/www/html/php_mysql_nginx_docker_treasure-products
+      - php-session-data:/var/lib/php/sessions  # Mount the volume for session data
+      - ./path/to/your/php.ini:/usr/local/etc/php/conf.d/custom.ini  # Mount your custom php.ini
     ports:
       - "80:80"
     depends_on:
@@ -26,6 +28,7 @@ services:
 
 volumes:
   db-data:
+  php-session-data:   # Define the volume for session storage
 
 networks:
   app-network:

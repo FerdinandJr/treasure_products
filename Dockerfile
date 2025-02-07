@@ -7,7 +7,9 @@ RUN docker-php-ext-install mysqli
 # Set the working directory
 WORKDIR /var/www/html
 
+RUN mkdir -p /path/to/directory
+
 # Clone the repository
-RUN git clone https://github.com/FerdinandJr/php_mysql_nginx_docker_treasure-products.git /var/www/html/php_mysql_nginx_docker_treasure-products
+COPY /.  /var/www/php_mysql_nginx_docker_treasure-products
 
 # Copy the Nginx configuration file to the container

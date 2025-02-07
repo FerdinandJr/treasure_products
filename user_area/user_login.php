@@ -1,7 +1,8 @@
+<!-- connect file -->
 <?php
-session_start();
 include('../includes/connect.php');
 include('../functions/common_function.php');
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -117,7 +118,7 @@ include('../functions/common_function.php');
             </div>
 
             <div>
-              <p class="mb-0">Don't have an account? <a href="user_registration.php" class="text-white-50 fw-bold">Sign Up</a>
+              <p class="mb-0">Don't have an account? <a href="user_registration" class="text-white-50 fw-bold">Sign Up</a>
               </p>
             </div>
             </form>

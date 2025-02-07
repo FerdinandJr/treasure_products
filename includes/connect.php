@@ -1,5 +1,5 @@
 <?php 
-$con=mysqli_connect('localhost', 'root', 'Mystore123!', 'my_store');
+$con=mysqli_connect('localhost', 'root', '', 'my store');
 if($con){
     
 }

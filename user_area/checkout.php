@@ -1,7 +1,11 @@
+<!-- connect file -->
 <?php
-session_start();
+
 include('../includes/connect.php');
+session_start();
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

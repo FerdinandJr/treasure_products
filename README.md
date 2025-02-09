@@ -107,7 +107,7 @@ sudo mysql -h localhost -u root
 2. Create a New User:
 
 ```bash
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Mystore123!'; 
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root@000!'; 
 FLUSH PRIVILEGES;
 exit;
 ```

@@ -9,13 +9,13 @@ sudo apt install -y apache2 php php-mysql git php-fpm mysql-server
 
 # Clone the Git repository
 echo "Cloning the repository..."
-sudo git clone https://github.com/FerdinandJr/php_mysql_nginx_docker_treasure-products.git /var/www/php_mysql_apache2_treasure-products
+sudo git clone https://github.com/FerdinandJr/php_mysql_nginx_docker_treasure-products.git /var/www/php_mysql_nginx_treasure-products
 
 
 #echo "Configuring Apache..."
 sudo rm -rf /etc/apache2/sites-available/000-default.conf
 
-sudo cp /var/www/php_mysql_apache2_treasure-products/000-default.conf /etc/apache2/sites-available/
+sudo cp /var/www/php_mysql_nginx_treasure-products/000-default.conf /etc/apache2/sites-available/
 
 
 echo "Configuring MySQL..."
@@ -24,7 +24,7 @@ sudo mysql -u root --password=root@000! -e "CREATE DATABASE IF NOT EXISTS my_sto
 
 # Import database
 echo "Importing database..."
-sudo mysql -u root --password=root@000! my_store < /var/www/php_mysql_apache2_treasure-products/my_store.sql
+sudo mysql -u root --password=root@000! my_store < /var/www/php_mysql_nginx_treasure-products/my_store.sql
 
 sudo systemctl restart apache2
 

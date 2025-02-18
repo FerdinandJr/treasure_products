@@ -2,7 +2,7 @@ version: '3'
 
 services:
   web:
-    build: ./php-mysql-nginx/.
+    build: .
     container_name: php-mysql-nginx
     ports:
       - "80:80"
@@ -12,7 +12,7 @@ services:
       - app-network
 
   db:
-    build: ./mysql-db/.
+    image: mysql:latest 
     container_name: mysql-db
     environment:
       MYSQL_ROOT_PASSWORD: "root@000!"

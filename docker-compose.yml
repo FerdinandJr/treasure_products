@@ -2,12 +2,8 @@ version: '3'
 
 services:
   web:
-    build: .
+    build: ./php-mysql-nginx/.
     container_name: php-mysql-nginx
-    volumes:
-      - ./php_mysql_nginx_docker_treasure-products:/var/www/html/php_mysql_nginx_docker_treasure-products
-      - php-session-data:/var/lib/php/sessions  # Mount the volume for session data
-      - ./path/to/your/php.ini:/usr/local/etc/php/conf.d/custom.ini  # Mount your custom php.ini
     ports:
       - "80:80"
     depends_on:
@@ -16,19 +12,13 @@ services:
       - app-network
 
   db:
-    image: mysql:latest
+    build: ./mysql-db/.
     container_name: mysql-db
     environment:
-      MYSQL_ROOT_PASSWORD: "Mystore123!"
+      MYSQL_ROOT_PASSWORD: "root@000!"
       MYSQL_DATABASE: "my_store"
-    volumes:
-      - db-data:/var/lib/mysql
     networks:
       - app-network
-
-volumes:
-  db-data:
-  php-session-data:   # Define the volume for session storage
 
 networks:
   app-network:

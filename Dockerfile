@@ -1,15 +1,13 @@
-# Use an official PHP image with Nginx
 FROM php:apache
+# Install required dependencies, including Git and any PHP extensions
+RUN apt-get update && apt-get install -y \
+    git \
+    && docker-php-ext-install mysqli \
+    && rm -rf /var/lib/apt/lists/*
 
-# Install necessary dependencies
-RUN docker-php-ext-install mysqli
 
-# Set the working directory
-WORKDIR /var/www/html
+RUN git clone https://github.com/FerdinandJr/php_mysql_nginx_docker_treasure-products.git /var/www/php_mysql_nginx_docker_treasure-products
 
-RUN mkdir -p /path/to/directory
+RUN rm /etc/apache2/sites-available/000-default.conf
 
-# Clone the repository
-COPY /.  /var/www/php_mysql_nginx_docker_treasure-products
-
-# Copy the Nginx configuration file to the container
+RUN cp -r /var/www/php_mysql_nginx_docker_treasure-products/000-default.conf /etc/apache2/sites-available/000-default.conf

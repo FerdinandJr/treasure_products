@@ -247,10 +247,7 @@ CREATE TABLE IF NOT EXISTS `user_table` (
 --
 
 INSERT INTO `user_table` (`user_id`, `username`, `user_email`, `user_password`, `user_image`, `user_ip`, `user_address`, `user_mobile`) VALUES
-(15, 'user1', 'user@gmail.com', '$2y$10$OD/rmmlivM5Vl5dXYxaJ.e2kc.TLqLQj.N9R76c29plOneNGJSs8y', '', '::1', 'Muntinlupa', '09123456789'),
-(16, 'wa', 'aw', '$2y$10$ZyXD/45d3U/cvHhD.l3fV.GRAIA29MpsYkzZSt.KbyUNb45An86q6', '', '::1', 'aw', 'aw'),
-(17, 'ferd', 'ferd', '$2y$10$dLcG/i.Vf9B9fEJUQWf2v.ORQmrEtLkrcKP3surucczdLjJMDPu1e', '', '::1', 'ferd', 'ferd'),
-(18, 'myk', 'Myk@gmail.com', '$2y$10$dxo0JRReTs.CUp8tK8wkQO9iAAO4qtulWVR1e0CTCXet5.AdyQlaO', '', '::1', 'myk', 'myk');
+(15, 'user1', 'user@gmail.com', '$2y$10$OD/rmmlivM5Vl5dXYxaJ.e2kc.TLqLQj.N9R76c29plOneNGJSs8y', '', '::1', 'Muntinlupa', '09123456789');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,46 +1,26 @@
-﻿# Run this Application with PHP, MySQL in Nginx: 
+﻿# Treasure Products full-stack e-commerce web application built with PHP and MySQL
 
 
 ## Install dependencies
 
+## Table of Contents
 
-1. Install Nginx, Php, Git and MySql:
+## Installation
+1. Install Dependencies Nginx, Php, Git and MySql:
 
 ```bash
 sudo apt update
-```
-
-```bash
 sudo apt install nginx -y
-```
-
-```bash
 sudo systemctl start nginx
-```
-
-```bash
 sudo systemctl enable nginx
-```
-
-```bash
 sudo systemctl status nginx
-```
-
-```bash
 sudo apt install php -y
-```
-
-```bash
 php -v
-```
-
-```bash
 sudo apt install git
+sudo apt install mysql-server -y
+sudo apt install php8.3 php8.3-fpm php8.3-mysql -y
 ```
 
-```bash
-sudo apt install mysql-server -y
-```
 
 ## Configure Nginx
 
@@ -92,9 +72,6 @@ server {
 }
 ```
 
-```bash
-sudo apt install php8.3 php8.3-fpm php8.3-mysql -y
-```
 
 ## Configure MySQl
 

@@ -1,9 +1,13 @@
 ﻿# Treasure Products full-stack e-commerce web application built with PHP and MySQL
 
+Treasure Products is a full-stack e-commerce web application built with PHP and MySQL, designed to sell a wide range of products, including gadgets and various other items. It features sessions, validation, seamless shopping experience login, product management, and checkout functionalities. 
 
-## Install dependencies
+https://github.com/user-attachments/assets/44078d47-0c19-46ea-96c9-49161b6f3b01
 
 ## Table of Contents
+- [Installation](#installation)
+- [Video](#video)
+
 
 ## Installation
 1. Install Dependencies Nginx, Php, Git and MySql:
@@ -11,11 +15,7 @@
 ```bash
 sudo apt update
 sudo apt install nginx -y
-sudo systemctl start nginx
-sudo systemctl enable nginx
-sudo systemctl status nginx
 sudo apt install php -y
-php -v
 sudo apt install git
 sudo apt install mysql-server -y
 sudo apt install php8.3 php8.3-fpm php8.3-mysql -y
@@ -45,35 +45,8 @@ git clone
 sudo nano /etc/nginx/sites-available/default
 ```
 
-```bash
-server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
 
-    root /var/www/html/treasure-products;
-    index index.php index.html index.htm;
-
-    server_name _;
-
-    location / {
-        try_files $uri $uri/ =404;
-    }
-
-    location ~ \.php$ {
-        include snippets/fastcgi-php.conf;
-        fastcgi_pass unix:/var/run/php/php8.3-fpm.sock;  # Ensure correct PHP version (replace 7.4 if necessary)
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        include fastcgi_params;
-    }
-
-    location ~ /\.ht {
-        deny all;
-    }
-}
-```
-
-
-## Configure MySQl
+## Configure MySQL
 
 1. Login to MySQL
 
@@ -89,7 +62,7 @@ FLUSH PRIVILEGES;
 exit;
 ```
 
-3. Enter database wusing localhost user and password:
+3. Enter database using localhost user and password:
 
 ```bash
 mysql -h localhost -u root -p
@@ -152,3 +125,12 @@ systemctl restart nginx
 ```bash
 tail -f /var/log/nginx/error.log
 ```
+
+
+## Video
+
+How to deploy php and mysql in AWS ec2: https://youtu.be/RZmgXHM1gt8?si=CBSIhRgeKGFuYrQ_
+
+How to deploy php and mysql application using bash scripting: https://youtu.be/w95Pqf9P8ic?si=Q-E-N_oPz7zzmtCm
+
+How to deploy php and mysql application using docker containers: https://youtu.be/SGHL_bScJq8?si=ACz1aMCTAAU6SYDF

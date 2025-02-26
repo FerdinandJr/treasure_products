@@ -129,8 +129,8 @@ tail -f /var/log/nginx/error.log
 
 ## Video
 
-How to deploy php and mysql in AWS ec2: https://youtu.be/RZmgXHM1gt8?si=CBSIhRgeKGFuYrQ_
+### How to deploy php and mysql in AWS ec2: https://youtu.be/RZmgXHM1gt8?si=CBSIhRgeKGFuYrQ_
 
-How to deploy php and mysql application using bash scripting: https://youtu.be/w95Pqf9P8ic?si=Q-E-N_oPz7zzmtCm
+### How to deploy php and mysql application using bash scripting: https://youtu.be/w95Pqf9P8ic?si=Q-E-N_oPz7zzmtCm
 
-How to deploy php and mysql application using docker containers: https://youtu.be/SGHL_bScJq8?si=ACz1aMCTAAU6SYDF
+### How to deploy php and mysql application using docker containers: https://youtu.be/SGHL_bScJq8?si=ACz1aMCTAAU6SYDF

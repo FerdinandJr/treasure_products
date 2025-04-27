@@ -125,7 +125,7 @@ systemctl restart nginx
 ```bash
 tail -f /var/log/nginx/error.log
 ```
-
+test
 
 ## Video
 

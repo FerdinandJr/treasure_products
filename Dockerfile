@@ -11,3 +11,5 @@ RUN git clone https://github.com/FerdinandJr/php_mysql_nginx_docker_treasure-pro
 RUN rm /etc/apache2/sites-available/000-default.conf
 
 RUN cp -r /var/www/php_mysql_nginx_docker_treasure-products/000-default.conf /etc/apache2/sites-available/000-default.conf
+
+CMD ["docker-compose", "up"]

@@ -10,7 +10,7 @@ pipeline {
             steps {
                 script {
                     echo "Pull source code from Git"
-                    git branch: 'main', url: 'https://github.com/FerdinandJr/php_mysql_nginx_docker_treasure-products.git'
+                    git branch: 'main', url: 'https://github.com/FerdinandJr/treasure_products.git'
                 }
             }
         }

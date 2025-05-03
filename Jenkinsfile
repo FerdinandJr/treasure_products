@@ -5,6 +5,7 @@ pipeline {
         EC2_IP = '13.213.55.242'
         GITHUB_REPO = 'https://github.com/FerdinandJr/treasure_products.git'
         REMOTE_USER = "ubuntu"
+        SSH_CREDENTIALS_ID = "my-ec2-ssh-key"
     }
 
     stages {
@@ -22,7 +23,7 @@ pipeline {
                 script {
                     echo "deploying to shell-script to ec2"
                     def shellCmd = "bash ./php.sh"
-                    sshagent (['ec2']) {
+                    sshagent ([SSH_CREDENTIALS_ID]) {
                         sh "scp -o StrictHostKeyChecking=no php.sh ${REMOTE_USER}@${EC2_IP}:/home/ubuntu"
                         sh "ssh -o StrictHostKeyChecking=no ${REMOTE_USER}@${EC2_IP} ${shellCmd}"
                     }

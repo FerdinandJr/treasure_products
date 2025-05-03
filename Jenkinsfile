@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         EC2_IP = '13.213.55.242'
-        GITHUB_REPO = 'https://github.com/FerdinandJr/labay_portfolio_v2.git'
+        GITHUB_REPO = 'https://github.com/FerdinandJr/treasure_products.git'
         REMOTE_USER = "ubuntu"
     }
 

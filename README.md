@@ -1,6 +1,10 @@
-﻿# Treasure Products full-stack e-commerce web application built with PHP and MySQL
+﻿# A full-stack monolithic e-commerce application built with PHP and MySQL. 
+ 
+It includes essential features such as user authentication, session management, product catalog, shopping cart, checkout, and an admin panel for managing products.
 
-Treasure Products is a full-stack e-commerce web application built with PHP and MySQL, designed to sell a wide range of products, including gadgets and various other items. It features sessions, validation, seamless shopping experience login, product management, and checkout functionalities. 
+Treasure Products is designed for selling gadgets and a variety of other items, it provides a seamless shopping experience.
+
+![treasure-products-diagram](https://github.com/FerdinandJr/treasure_products/blob/4beb2875c040d477022011fd64c018806313bf68/treasure-products-diagram.svg)
 
 https://github.com/user-attachments/assets/44078d47-0c19-46ea-96c9-49161b6f3b01
 
